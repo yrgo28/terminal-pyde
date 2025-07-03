@@ -3,6 +3,7 @@
 STEPS:
 
 1.Put your python project directory (/path/to/your/project)
+
 2.Type "E" to open that directory and edit files.
 3.Enjoy!
 
