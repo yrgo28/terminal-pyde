@@ -1,6 +1,4 @@
-PYDE
-
-A minimal way to manage your python projects.
+#PYDE, a minimal way to manage your python projects.
 
 STEPS:
 
@@ -17,7 +15,10 @@ INSTALATION/DEPENDECES (Install it from software distributors and pip):
 2. jedi-vim (this is in another repo, but in arch linux can install it just typing "pacman -S vim-jedi") #KISS
 3. python3
 4. termcolor (from pip "pip install termcolor")
-
 5. (optional) add an alias like ("alias pyde='python3 ~/pyde/pyde.py'")
 
-Sorry for my bad english, i'm from venezuela. I hope you like this little project :)
+FIRST TIME USING:
+* PYDE have not "autosave" (yet), so you need to modify "pyderc.py" for save your preferences
+* If you want to change working directory in a session, just type "W" in options menu, specify your directory and nothing else!
+
+Sorry for my bad english, i'm from venezuela and i also learning this language lol. I hope you like this little project :)
