@@ -132,7 +132,7 @@ def _credits():
     clear()
     print("""PYDE, a minimal way to manage your python's projects.
 
-*Programming and desingn: yrgo28
+*Programming and design: yrgo28
 *Base and "engine": vim, vim-jedi
 You're a modder? Put your name here!
     
