@@ -4,10 +4,10 @@ from termcolor import colored
 
 import pyderc #THIS IS CONFIG FILE
 
-has_wd = pyderc.has_wd
+has_wd: bool
 FIRST_TIME_OPTIONS = pyderc.FIRST_TIME_OPTIONS
 show_wd_main = pyderc.show_wd_main
-separator = pyderc.char_separators
+pdir = pyderc.program_directory
 
 separator = pyderc.char_separators
 editor_work_dir = pyderc.workspace
@@ -16,7 +16,7 @@ pydeascii = colored(""" ____   __ __   ___    ___
 | |  | |  V  | |   \  |   |
 |  _/   \   /  |  | | | | |
 | |      | |   |  | | | __|  _
-|_|      |_|   |___/  |___| |_| v1.1
+|_|      |_|   |___/  |___| |_| v1.2
 by: yrgo28 (2025)""", "yellow")
 
 def inter(multiplier: int):
@@ -65,7 +65,13 @@ def main_menu():
     while True:
         print(pydeascii)
         print((separator * 36))
-        if(show_wd_main == True):
+
+        if(editor_work_dir != None):
+            has_wd = True
+        else: 
+            has_wd = False
+
+        if(show_wd_main == True and has_wd):
             print('Working Directory: ' + editor_work_dir)
         print("[E]dit")
         print("[O]ptions")
@@ -79,18 +85,21 @@ def options_choose():
     global has_wd
     global show_wd_main
 
-    if(editor_work_dir != None):
-        has_wd = True
+    cons_subcommand: str
 
     while True:
         command = input('Command: ')
 
         if(command == "W" or command == "w"):
-            editor_work_dir = input('Type working directory: ')
-            has_wd = True
+            cons_subcommand = input('Type working directory (you can cancel changes typing "cancel"): ')
+            if(cons_subcommand == "cancel"):
+                options_menu()
+            else:
+                editor_work_dir = cons_subcommand
+
             options_menu()
             
-        if(command == "L" or command == "l" and has_wd):
+        if(command == "L" or command == "l" and editor_work_dir != None):
             print('=' * 36)
             _exec('ls ' + editor_work_dir + '/*.py')
             cons = input('Press [Enter] to continue...')
@@ -103,36 +112,45 @@ def options_choose():
                 show_wd_main = True
             options_menu()
 
+        if(command == "I" or command == "i"):
+            _exec('sudo vim ' + pdir + '/pyderc.py')
+
         if(command == 'done'):
             main_menu()
+
+        options_menu()
 
 def options_menu():
     global FIRST_TIME_OPTIONS
 
-    clear()
-    if(FIRST_TIME_OPTIONS == True):
-        print(colored('NOTE: type "done" for back to main menu.', "yellow"))
-        print(colored('NOTE: all configs are in "pyderc.py".', "blue"))
-        FIRST_TIME_OPTIONS = False
-    print('Options')
-    print(separator * 36)
-    print("Set [W]orking Directory")
-    if(editor_work_dir == None):
-        inter(0)
-        print(colored("NOTE: Working directory is not loaded yet!", "red"))
-        inter(0)
-    else:
-        print("[L]ist files")
-    print("""Toggle: show/hide working
+    while True:
+        clear()
+        if(FIRST_TIME_OPTIONS == True):
+            print(colored('NOTE: type "done" for back to main menu.', "yellow"))
+            print(colored('NOTE: all configs are in "pyderc.py".', "blue"))
+            inter(0)
+            FIRST_TIME_OPTIONS = False
+        print('Options')
+        print(separator * 36)
+        print("Set [W]orking Directory")
+        if(editor_work_dir == None):
+            inter(0)
+            print(colored("NOTE: Working directory is not loaded yet!", "red"))
+            inter(0)
+        elif(editor_work_dir != None):
+            print("[L]ist files")
+            print("""Toggle: show/hide working
 di[R]ectory in main menu.""")
-    print(separator * 36)
-    options_choose()
+
+        print("Ed[i]t pyrc.py (Restart required)")
+        print(separator * 36)
+        options_choose()
 
 def _credits():
     clear()
     print("""PYDE, a minimal way to manage your python's projects.
 
-*Programming and design: yrgo28
+*Programming and design: yrgo28         
 *Base and "engine": vim, vim-jedi
 You're a modder? Put your name here!
     
