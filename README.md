@@ -5,9 +5,10 @@ STEPS:
 1.Put your python project directory (/path/to/your/project)
 
 2.Type "E" to open that directory and edit files.
+
 3.Enjoy!
 
-OBJETIVE: Make a conformable way to manage python projects using vim and jedi-vim. 
+OBJETIVE: Make a conformtable way to manage python projects using vim and jedi-vim. 
 
 FUN FACT: I have this idea because i'm in a chromebook (have just 16GB disk space, and 8GB left after so installation). I never find a really minimal way for edit my python's projects, and i just made this :)
 
