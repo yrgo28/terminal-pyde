@@ -1,9 +1,4 @@
- ___   __  __  ___    ___
-| |  | |  V  | |   \  |   |
-|  _/   \   /  |  | | | | |
-| |      | |   |  | | | __|  _
-|_|      |_|   |___/  |___| |_|
-
+PYDE
 
 A minimal way to manage your python projects.
 
