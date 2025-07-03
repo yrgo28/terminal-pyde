@@ -16,7 +16,8 @@ pydeascii = colored(""" ____   __ __   ___    ___
 | |  | |  V  | |   \  |   |
 |  _/   \   /  |  | | | | |
 | |      | |   |  | | | __|  _
-|_|      |_|   |___/  |___| |_| v1.1""", "yellow")
+|_|      |_|   |___/  |___| |_| v1.1
+by: yrgo28 (2025)""", "yellow")
 
 def inter(multiplier: int):
 
@@ -54,6 +55,9 @@ def choose_main():
         if(op == "O" or op == "o"):
             options_menu()
 
+        if(op == "T" or op == "t"):
+            _credits()
+
         main_menu()        
 
 def main_menu():
@@ -65,6 +69,7 @@ def main_menu():
             print('Working Directory: ' + editor_work_dir)
         print("[E]dit")
         print("[O]ptions")
+        print("Credi[T]s")
         print("E[x]it")
         print((separator * 36))
         choose_main()
@@ -122,6 +127,21 @@ def options_menu():
 di[R]ectory in main menu.""")
     print(separator * 36)
     options_choose()
+
+def _credits():
+    clear()
+    print("""PYDE, a minimal way to manage your python's projects.
+
+*Programming and desingn: yrgo28
+*Base and "engine": vim, vim-jedi
+You're a modder? Put your name here!
+    
+LICENSE: GPL-3.0
+
+THANKS FOR USE <3
+/yrgo28""")
+    inter(0)
+    cos = input('press [enter] to continue...')
 
 
 main_menu()
