@@ -8,6 +8,8 @@ has_wd: bool
 FIRST_TIME_OPTIONS = pyderc.FIRST_TIME_OPTIONS
 show_wd_main = pyderc.show_wd_main
 pdir = pyderc.program_directory
+SHOW_NEW_FILE_NOTE = pyderc.note_new_file
+sep_len = pyderc.separator_len
 
 separator = pyderc.char_separators
 editor_work_dir = pyderc.workspace
@@ -16,7 +18,8 @@ pydeascii = colored(""" ____   __ __   ___    ___
 | |  | |  V  | |   \  |   |
 |  _/   \   /  |  | | | | |
 | |      | |   |  | | | __|  _
-|_|      |_|   |___/  |___| |_| v1.2
+|_|      |_|   |___/  |___| |_| v1.3
+
 by: yrgo28 (2025)""", "yellow")
 
 def inter(multiplier: int):
@@ -29,6 +32,9 @@ def inter(multiplier: int):
             print(' ')
         else:
             break;
+
+def separ():
+    print(separator * int(sep_len))
 
 def clear():
     os.system('clear')
@@ -58,13 +64,16 @@ def choose_main():
         if(op == "T" or op == "t"):
             _credits()
 
+        if(op == "N" or op == "n"):
+            new_file()
+
         main_menu()        
 
 def main_menu():
     clear()
     while True:
         print(pydeascii)
-        print((separator * 36))
+        separ()
 
         if(editor_work_dir != None):
             has_wd = True
@@ -74,10 +83,11 @@ def main_menu():
         if(show_wd_main == True and has_wd):
             print('Working Directory: ' + editor_work_dir)
         print("[E]dit")
+        print("[N]ew File")
         print("[O]ptions")
         print("Credi[T]s")
         print("E[x]it")
-        print((separator * 36))
+        separ()
         choose_main()
 
 def options_choose():
@@ -100,7 +110,7 @@ def options_choose():
             options_menu()
             
         if(command == "L" or command == "l" and editor_work_dir != None):
-            print('=' * 36)
+            separ()
             _exec('ls ' + editor_work_dir + '/*.py')
             cons = input('Press [Enter] to continue...')
             options_menu()
@@ -131,20 +141,33 @@ def options_menu():
             inter(0)
             FIRST_TIME_OPTIONS = False
         print('Options')
-        print(separator * 36)
-        print("Set [W]orking Directory")
+        separ()
+        print("* Set [W]orking Directory")
         if(editor_work_dir == None):
             inter(0)
             print(colored("NOTE: Working directory is not loaded yet!", "red"))
             inter(0)
         elif(editor_work_dir != None):
-            print("[L]ist files")
-            print("""Toggle: show/hide working
-di[R]ectory in main menu.""")
-
-        print("Ed[i]t pyrc.py (Restart required)")
-        print(separator * 36)
+            print("* [L]ist files")
+            print("""* Toggle: show/hide working di[R]ectory in main menu.""")
+        print("* Ed[i]t pyderc.py (Restart required)")
+        separ()
         options_choose()
+
+def new_file():
+    global SHOW_NEW_FILE_NOTE
+
+    separ()
+    if(SHOW_NEW_FILE_NOTE == True):
+        print(colored("#RULES (For more compatibility)", "red"))
+        print("*File name couldn't have spacebars")
+        print('* Remember put .py extension')
+        print('* Leave blank for cancel')
+        inter(0)
+        SHOW_NEW_FILE_NOTE = False
+
+    new_file = input('File name: ')
+    _exec('sudo touch ' + editor_work_dir + '/' + new_file)
 
 def _credits():
     clear()
@@ -155,6 +178,7 @@ def _credits():
 You're a modder? Put your name here!
     
 LICENSE: GPL-3.0
+SOURCE: https://github.com/yrgo28/terminal-pyde
 
 THANKS FOR USE <3
 /yrgo28""")
